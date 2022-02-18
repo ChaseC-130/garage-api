@@ -23,9 +23,9 @@ var options = {
 
 const args = process.argv;
 
-var username = args[4];
-var password = args[5];
-var confirmedToken = args[6];
+var username = args[3];
+var password = args[4];
+var confirmedToken = args[5];
 
 var accessLogStream = rfs.createStream('access.log', {
   interval: '7d', // rotate every 7 days to
