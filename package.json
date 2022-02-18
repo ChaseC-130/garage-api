@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "node-aladdin-connect-garage-door": "^0.1.2"
+  }
+}
