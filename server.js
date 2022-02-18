@@ -58,7 +58,7 @@ app.post("/open", function (req, res) {
 app.post("/close", function (req, res) {
   
   const {token} = req.body;
-
+  console.log(confirmedToken);
   console.log(token)
 
   if (token === confirmedToken) {
