@@ -43,14 +43,17 @@ server.listen(port, () => {
 
 app.get("/open", (req, res, next) => {
   aladdinGarageDoor(username, password, "open", callback, deviceNumber, garageNumber, allowDebug);  
+  res.send("Open command received!")
 });
 
 app.get("/close", (req, res, next) => {
   aladdinGarageDoor(username, password, "close", callback, deviceNumber, garageNumber, allowDebug);  
+  res.send("Close command received!")
 });
 
 app.get("/status", (req, res, next) => {
   aladdinGarageDoor(username, password, "status", callback, deviceNumber, garageNumber, allowDebug);  
+  res.send("Status check");
 });
 
 
