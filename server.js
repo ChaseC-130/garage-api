@@ -36,6 +36,7 @@ var app = express();
 
 // setup logger
 app.use(morgan('combined', { stream: accessLogStream }))
+app.use(expres.json());
 
 var server = https.createServer(options, app);
 server.listen(port, () => {
