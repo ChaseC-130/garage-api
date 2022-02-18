@@ -25,6 +25,7 @@ var options = {
 
 var username = process.env.USERNAME;
 var password = process.env.PASSWORD;
+var confirmedToken = process.env.TOKEN;
 
 var accessLogStream = rfs.createStream('access.log', {
   interval: '7d', // rotate every 7 days to
@@ -42,24 +43,34 @@ server.listen(port, () => {
 })
 
 app.get("/open", (req, res, next) => {
-  aladdinGarageDoor(username, password, "open", callback, deviceNumber, garageNumber, allowDebug);  
-  console.log("Username: " + username);
-  console.log("Password: " + password);
-  res.send("Open command received!")
+
+  const { token } = req.body;
+
+  if (token === confirmedToken) {
+    aladdinGarageDoor(username, password, "open", callback, deviceNumber, garageNumber, allowDebug);  
+    res.send("Open command received!")
+  } else {
+    res.send("No authentication token received")
+  }
 });
 
 app.get("/close", (req, res, next) => {
-  aladdinGarageDoor(username, password, "close", callback, deviceNumber, garageNumber, allowDebug);  
-  console.log("Username: " + username);
-  console.log("Password: " + password);
-  res.send("Close command received!")
+
+  if (token === confirmedToken) {
+    aladdinGarageDoor(username, password, "close", callback, deviceNumber, garageNumber, allowDebug);  
+    res.send("Close command received!")
+} else {
+  res.send("No authentication token received")
+  }
 });
 
 app.get("/status", (req, res, next) => {
-  aladdinGarageDoor(username, password, "status", callback, deviceNumber, garageNumber, allowDebug);  
-  console.log("Username: " + username);
-  console.log("Password: " + password);
-  res.send("Status check");
+  if (token === confirmedToken) {
+    aladdinGarageDoor(username, password, "status", callback, deviceNumber, garageNumber, allowDebug);  
+    res.send("Status check");
+  } else {
+    res.send("No authentication token received")
+  }
 });
 
 
