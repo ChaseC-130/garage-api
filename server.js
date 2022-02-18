@@ -2,6 +2,7 @@ var aladdinGarageDoor = require('node-aladdin-connect-garage-door');
 var express = require("express") 
 var morgan = require('morgan');
 var https = require('https');
+require('dotenv').config();
 var rfs = require('rotating-file-stream');
 var fs = require('fs');
 const port = 3000;
@@ -18,8 +19,8 @@ var options = {
 };
 
 
-var username = `${USERNAME}`;
-var password = `${PASSWORD}`;
+var username = process.env.USERNAME;
+var password = process.env.PASSWORD;
 
 var accessLogStream = rfs.createStream('access.log', {
   interval: '7d', // rotate every 7 days to
