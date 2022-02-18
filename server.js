@@ -18,8 +18,8 @@ var options = {
 };
 
 
-var username = `${username}`;
-var password = `${password}`;
+var username = `${USERNAME}`;
+var password = `${PASSWORD}`;
 
 var accessLogStream = rfs.createStream('access.log', {
   interval: '7d', // rotate every 7 days to
