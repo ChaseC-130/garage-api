@@ -45,46 +45,39 @@ server.listen(port, () => {
 
 app.post("/open", function (req, res) {
 
-  const token = req.body;
-
-  console.log(req.body);
+  const { token } = req.body;
 
   if (token === confirmedToken) {
     aladdinGarageDoor(username, password, "open", callback, deviceNumber, garageNumber, allowDebug);  
     res.send("Open command received!")
   } else {
-    res.send("No authentication token received")
+    res.send("Invalid authentication token received")
   }
 });
 
 app.post("/close", function (req, res) {
   
-  const token = req.body;
+  const {token} = req.body;
 
-  console.log(req.body);
-  
 
   if (token === confirmedToken) {
     aladdinGarageDoor(username, password, "close", callback, deviceNumber, garageNumber, allowDebug);  
     res.send("Close command received!")
 } else {
-  res.send("No authentication token received")
+  res.send("Invalid authentication token received")
   }
 });
 
 app.post("/status", function (req, res) {
 
   
-  const token = req.body;
-
-  console.log(req.body);
-  
+  const {token} = req.body;
 
   if (token === confirmedToken) {
     aladdinGarageDoor(username, password, "status", callback, deviceNumber, garageNumber, allowDebug);  
     res.send("Status check");
   } else {
-    res.send("No authentication token received")
+    res.send("Invalid authentication token received")
   }
 });
 
