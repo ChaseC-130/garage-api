@@ -59,6 +59,7 @@ app.post("/close", function (req, res) {
   
   const {token} = req.body;
 
+  console.log(token)
 
   if (token === confirmedToken) {
     aladdinGarageDoor(username, password, "close", callback, deviceNumber, garageNumber, allowDebug);  
