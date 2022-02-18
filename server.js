@@ -2,6 +2,7 @@ var aladdinGarageDoor = require('node-aladdin-connect-garage-door');
 var express = require("express") 
 var morgan = require('morgan');
 var https = require('https');
+var path = require('path');
 require('dotenv').config();
 var rfs = require('rotating-file-stream');
 var fs = require('fs');
@@ -11,11 +12,14 @@ const port = 3000;
 var allowDebug = false;
 var deviceNumber = 0;
 var garageNumber = 1;
-var key = fs.readFileSync(__dirname + '/../certs/selfsigned.key');
-var cert = fs.readFileSync(__dirname + '/../certs/selfsigned.crt')
+var key = fs.readFileSync('/etc/letsencrypt/live/home.chasecargill.com/privkey.pem', 'utf8');
+var cert = fs.readFileSync('/etc/letsencrypt/live/home.chasecargill.com/cert.pem', 'utf-8');
+var ca = fs.readFileSync('/etc/letsencrypt/live/home.chasecargill.com/chain.pem', 'utf-8')
+
 var options = {
   key: key,
-  cert: cert
+  cert: cert,
+  ca: ca
 };
 
 
