@@ -23,9 +23,9 @@ var options = {
 
 const args = process.argv;
 
-var username = args[3];
-var password = args[4];
-var confirmedToken = args[5];
+var username = args[4];
+var password = args[5];
+var confirmedToken = args[6];
 
 var accessLogStream = rfs.createStream('access.log', {
   interval: '7d', // rotate every 7 days to
@@ -36,7 +36,7 @@ var app = express();
 
 // setup logger
 app.use(morgan('combined', { stream: accessLogStream }))
-app.use(expres.json());
+app.use(express.json());
 
 var server = https.createServer(options, app);
 server.listen(port, () => {
