@@ -3,7 +3,6 @@ var express = require("express")
 var morgan = require('morgan');
 var https = require('https');
 var path = require('path');
-require('dotenv').config();
 var rfs = require('rotating-file-stream');
 var fs = require('fs');
 const port = 3000;
@@ -22,10 +21,11 @@ var options = {
   ca: ca
 };
 
+const args = process.argv;
 
-var username = process.env.USERNAME;
-var password = process.env.PASSWORD;
-var confirmedToken = process.env.TOKEN;
+var username = args[3];
+var password = args[4];
+var confirmedToken = args[5];
 
 var accessLogStream = rfs.createStream('access.log', {
   interval: '7d', // rotate every 7 days to
@@ -42,9 +42,11 @@ server.listen(port, () => {
   console.log("Server listening on: " + port);
 })
 
-app.get("/open", (req, res, next) => {
+app.post("/open", function (req, res) {
 
   const { token } = req.body;
+
+  console.log(req.body);
 
   if (token === confirmedToken) {
     aladdinGarageDoor(username, password, "open", callback, deviceNumber, garageNumber, allowDebug);  
@@ -54,7 +56,12 @@ app.get("/open", (req, res, next) => {
   }
 });
 
-app.get("/close", (req, res, next) => {
+app.post("/close", function (req, res) {
+  
+  const { token } = req.body;
+
+  console.log(req.body);
+  
 
   if (token === confirmedToken) {
     aladdinGarageDoor(username, password, "close", callback, deviceNumber, garageNumber, allowDebug);  
@@ -64,7 +71,14 @@ app.get("/close", (req, res, next) => {
   }
 });
 
-app.get("/status", (req, res, next) => {
+app.post("/status", function (req, res) {
+
+  
+  const { token } = req.body;
+
+  console.log(req.body);
+  
+
   if (token === confirmedToken) {
     aladdinGarageDoor(username, password, "status", callback, deviceNumber, garageNumber, allowDebug);  
     res.send("Status check");
