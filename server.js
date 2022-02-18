@@ -23,11 +23,10 @@ var options = {
 
 const args = process.argv;
 
-var username = args[3];
-var password = args[4];
-var confirmedToken = args[5];
+var username = args[2];
+var password = args[3];
+var confirmedToken = args[4];
 
-console.log("username : " + username);
 var accessLogStream = rfs.createStream('access.log', {
   interval: '7d', // rotate every 7 days to
   path: path.join(__dirname, 'log')
