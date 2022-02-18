@@ -44,7 +44,7 @@ server.listen(port, () => {
 
 app.post("/open", function (req, res) {
 
-  const { token } = req.body;
+  const token = req.body;
 
   console.log(req.body);
 
@@ -58,7 +58,7 @@ app.post("/open", function (req, res) {
 
 app.post("/close", function (req, res) {
   
-  const { token } = req.body;
+  const token = req.body;
 
   console.log(req.body);
   
@@ -74,7 +74,7 @@ app.post("/close", function (req, res) {
 app.post("/status", function (req, res) {
 
   
-  const { token } = req.body;
+  const token = req.body;
 
   console.log(req.body);
   
